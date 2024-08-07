@@ -7,11 +7,11 @@ from os import getenv
 from flask import Flask, abort, jsonify, request
 from flask_cors import CORS
 
-from api.v1.views import app_views
+'''from api.v1.views import app_views'''
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-app.register_blueprint(app_views)
+'''app.register_blueprint(app_views)'''
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 AUTH_TYPE = getenv("AUTH_TYPE")
