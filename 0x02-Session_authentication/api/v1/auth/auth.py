@@ -2,6 +2,7 @@
 """
 Definition of class Auth
 """
+import os
 from flask import request
 from typing import (
     List,
@@ -52,3 +53,10 @@ class Auth:
         Returns a User instance
         """
         return None
+
+    def session_cookie(self, request=None):
+        """ Returns the value of the cookie named by SESSION_NAME """
+        if request is None:
+            return None
+        cookie_name = os.getenv('SESSION_NAME', '_my_session_id')
+        return request.cookies.get(cookie_name)
