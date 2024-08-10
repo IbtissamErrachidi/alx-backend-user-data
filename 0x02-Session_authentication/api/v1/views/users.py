@@ -120,3 +120,11 @@ def update_user(user_id: str = None) -> str:
         user.last_name = rj.get('last_name')
     user.save()
     return jsonify(user.to_json()), 200
+
+
+@app_views.route('/api/v1/users/me', methods=['GET'], strict_slashes=False)
+def get_me():
+    """Retrieve the authenticated User object"""
+    if not request.current_user:
+        abort(404)
+    return jsonify(request.current_user.to_dict()), 200
