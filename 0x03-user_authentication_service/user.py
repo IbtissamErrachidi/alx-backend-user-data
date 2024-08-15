@@ -10,6 +10,9 @@ Base = declarative_base()
 
 
 class User(Base):
+    """
+    Definition of class User
+    """
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
