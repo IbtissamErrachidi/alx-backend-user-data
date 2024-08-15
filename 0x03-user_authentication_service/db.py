@@ -48,3 +48,16 @@ class DB:
         except Exception as e:
             raise InvalidRequestError("Invalid query argument.") from e
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Update user information based on user_id"""
+        user = self.find_user_by(id=user_id)
+
+        valid_attributes = {'email', 'hashed_password',
+                            'session_id', 'reset_token'}
+        for key, value in kwargs.items():
+            if key not in valid_attributes:
+                raise ValueError(f"Invalid attribute: {key}")
+            setattr(user, key, value)
+
+        self._session.commit()
